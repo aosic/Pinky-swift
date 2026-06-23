@@ -1,0 +1,79 @@
+//
+//  dragon.pinky.swift
+//  Pinky-swift
+//
+//  Created by aosic on 2026/6/15.
+//
+
+import Foundation
+public let Local_dragon = """
+angle := 0
+x := 25
+y := 60
+func pow(a, b)
+    ret a^b
+end
+func factorial(n)
+    res := 1.0
+    for i := 1, n do
+        res := res * i
+    end
+    ret res
+end
+func cos(a)
+    a := a * 3.141592 / 180
+    value := 1
+    sign := -1
+    n := 200
+    i := 2
+    while i < n do
+        value := value + (pow(a, i) / factorial(i) * sign)
+        i := i + 2
+        sign := sign * -1
+    end
+    ret value
+end
+func sin(a)
+    a := a * 3.141592 / 180
+    value := a
+    sign := -1
+    n := 200
+    i := 3
+    while i < n do
+        value := value + (pow(a, i) / factorial(i) * sign)
+        i := i + 2
+        sign := sign * -1
+    end
+    ret value
+end
+func cos90(a)
+    a := a % 360
+    if a == 0   then ret  1.0 end
+    if a == 90  then ret  0.0 end
+    if a == 180 then ret -1.0 end
+    if a == 270 then ret  0.0 end
+    if a == 360 then ret  1.0 end
+    ret -99999
+end
+func sin90(a)
+    a := a % 360
+    if a == 0   then ret  0.0 end
+    if a == 90  then ret  1.0 end
+    if a == 180 then ret  0.0 end
+    if a == 270 then ret -1.0 end
+    if a == 360 then ret  0.0 end
+    ret -99999
+end
+func dragon(size, level, d)
+    if level == 0  then
+        x := x - cos90(angle) * size
+        y := y + sin90(angle) * size
+        println("line " + x + " " + y)
+    else
+        dragon(size / 1.4142135624, level - 1, 1)
+        angle := angle - d * 90
+        dragon(size / 1.4142135624, level - 1, -1)
+    end
+end
+dragon(60, 12, 1)
+"""
